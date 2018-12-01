@@ -1,10 +1,25 @@
 import React, {Component} from 'react';
 import './styles.css';
-import Masonry  from 'react-masonry-layout';
+import Masonry  from 'masonry-layout';
 import NoteItem from "../NoteItem";
 import PropTypes from 'prop-types';
 
 class NoteGrid extends Component{
+    componentDidMount() {
+        const grid = this.grid;
+        this.msnry = new Masonry(grid, {
+            itemSelector: '.note',
+            columnWidth: 200,
+            gutter: 10,
+            isFitWidth: true,
+        });
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.msnry.reloadItems();
+        this.msnry.layout();
+    }
+
     render() {
         const notesList = this.props.notes.map(item => {
             return (
@@ -12,13 +27,8 @@ class NoteGrid extends Component{
             )
         });
         return (
-            <div className="notes-grid">
-                <Masonry
-                    id="masonry-layout"
-                    ref={instance => this.instance = instance}
-                    sizes={[{columns: 6, gutter: 10}]}>
-                    {notesList}
-                </Masonry>
+            <div className="notes-grid" ref={grid => this.grid = grid}>
+                {notesList}
             </div>
         )
     }
