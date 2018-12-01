@@ -3,6 +3,7 @@ import './App.css';
 import Header from "./components/Header";
 import fetch from 'cross-fetch';
 import NoteEditor from "./components/NoteEditor";
+import NoteGrid from "./components/NoteGrid";
 
 const initialState = {
   notes: []
@@ -42,17 +43,12 @@ class App extends Component {
 
   render() {
     const notes = this.state.notes;
-    const notesList = notes.map(item => {
-      return(
-          <p>{item.text}</p>
-      )
-    });
-
+    console.log(notes);
     return (
       <div className="App">
         <Header header={'Notes App'}/>
         <NoteEditor addNote={this.addNote}/>
-          {notesList}
+        <NoteGrid notes={notes} deleteNote={this.deleteNote}/>
       </div>
     );
   }

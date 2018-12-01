@@ -1,18 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './styles.css';
+import PropTypes from "prop-types";
 
-class NoteItem extends Component {
-
-    render() {
-        const note = this.props.note;
-        const deleteNote = this.props.deleteNote;
+const NoteItem = ({note, deleteNote}) =>{
+        const onClick = (e) => {
+          deleteNote(note.messageID);
+        };
         return (
-            <div className="note">
-                <span className="delete-note">x</span>
+            <div className="note" style={{backgroundColor: note.bgColor}}>
+                <span className="delete-note" onClick={onClick.bind(this)}>x</span>
                 <span>{note.text}</span>
             </div>
         )
-    }
-}
+};
+
+NoteItem.propTypes = {
+    note: PropTypes.object.isRequired,
+    deleteNote: PropTypes.func.isRequired
+};
 
 export default NoteItem;

@@ -1,23 +1,32 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './styles.css';
-import Masonry from 'react-masonry-layout';
+import Masonry  from 'react-masonry-layout';
+import NoteItem from "../NoteItem";
+import PropTypes from 'prop-types';
 
-class NoteGrid extends Component {
-
+class NoteGrid extends Component{
     render() {
-        const notes = this.props.notes;
-        const grid = this.$refs.grid;
-        const msnry = new Masonry(grid, {
-            itemSelector: '.note',
-            columnWidth: 200,
-            gutter: 10,
-            isFitWidth: true
+        const notesList = this.props.notes.map(item => {
+            return (
+                <NoteItem note={item} deleteNote={this.props.deleteNote} key={item.messageID}/>
+            )
         });
         return (
-            <div className="notes-grid" ref="grid">
+            <div className="notes-grid">
+                <Masonry
+                    id="masonry-layout"
+                    ref={instance => this.instance = instance}
+                    sizes={[{columns: 6, gutter: 10}]}>
+                    {notesList}
+                </Masonry>
             </div>
-        );
+        )
     }
 }
+
+NoteGrid.propTypes = {
+    notes: PropTypes.array.isRequired,
+    deleteNote: PropTypes.func.isRequired
+};
 
 export default NoteGrid;
