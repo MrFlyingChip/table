@@ -9,7 +9,7 @@ const NoteItem = ({note, deleteNote}) =>{
         return (
             <div className="note" style={{backgroundColor: note.bgColor}}>
                 <span className="delete-note" onClick={onClick.bind(this)}>x</span>
-                <span>{note.text}</span>
+                {note.text}
             </div>
         )
 };

@@ -20,8 +20,7 @@ class NoteEditor extends Component {
 
     onSubmit(e){
         const {text} = this.state;
-        const newSticker = {messageID: this.hashCode(text),
-                            text: text,
+        const newSticker = {text: text,
                             bgColor: document.getElementById('color').value};
         this.props.addNote(newSticker);
         this.setState({text: ""});
