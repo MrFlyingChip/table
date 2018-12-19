@@ -1,0 +1,3 @@
+export const FETCH_STICKERS = 'FETCH_STICKERS';
+export const DELETE_STICKER = 'DELETE_STICKER';
+export const ADD_STICKER = 'ADD_STICKER';
