@@ -1,9 +1,281 @@
-{
-  box-sizing: border-box;
+input {
+    display: inline-block;
+    width: auto
 }
 
-body {
-  font-family: sans-serif;
-  font-weight: 300;
-  background-color: #eaeaea;
+i {
+    font-style: normal;
+    background-color: #fafad2
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 5px
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9
+}
+
+th {
+    text-align: left;
+    border: 1px solid #ddd;
+    border-bottom: 3px solid #ddd;
+    font-family: Glyphicons Halflings;
+    position: relative;
+    cursor: pointer
+}
+
+th:after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    display: block;
+    opacity: .2;
+    font-size: .7em
+}
+
+th.sortAsc:after {
+    content: "\25B2";
+    opacity: .8
+}
+
+th.sortDesc:after {
+    content: "\25BC";
+    opacity: .8
+}
+
+td {
+    border: 1px solid #ddd
+}
+
+td, th {
+    padding: 8px
+}
+
+select {
+    outline: none
+}
+
+.search-items input {
+    padding: 5px;
+    outline: none;
+    border: 1px solid #ddd
+}
+
+nav {
+    background-color: #ddd;
+    border-radius: 5px
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0
+}
+
+nav ul li {
+    display: inline-block
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #337ab7
+}
+
+nav ul li a, nav ul li span {
+    padding: 7px 8px;
+    display: block
+}
+
+nav ul li span.active {
+    color: #fff
+}
+
+nav ul li span.disabled {
+    color: #777;
+    cursor: not-allowed
+}
+
+input[data-v-6ca9551c] {
+    border: 1px solid #ccc;
+    outline: none;
+    border-right: none;
+    padding: 5px;
+    width: 500px
+}
+
+button[data-v-6ca9551c] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    cursor: pointer
+}
+
+button[data-v-6ca9551c]:active {
+    opacity: .8
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #73879c;
+    font-size: 14px
+}
+
+.app-footer, .app-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 8px 2px
+}
+
+.app-upload {
+    padding: 10px 0
+}
+
+input {
+    display: inline-block;
+    width: auto
+}
+
+i {
+    font-style: normal;
+    background-color: #fafad2
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 5px
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9
+}
+
+th {
+    text-align: left;
+    border: 1px solid #ddd;
+    border-bottom: 3px solid #ddd;
+    font-family: Glyphicons Halflings;
+    position: relative;
+    cursor: pointer
+}
+
+th:after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    display: block;
+    opacity: .2;
+    font-size: .7em
+}
+
+th.sortAsc:after {
+    content: "\25B2";
+    opacity: .8
+}
+
+th.sortDesc:after {
+    content: "\25BC";
+    opacity: .8
+}
+
+td {
+    border: 1px solid #ddd
+}
+
+td, th {
+    padding: 8px
+}
+
+select {
+    outline: none
+}
+
+.search-items input {
+    padding: 5px;
+    outline: none;
+    border: 1px solid #ddd
+}
+
+nav {
+    background-color: #ddd;
+    border-radius: 5px
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0
+}
+
+nav ul li {
+    display: inline-block
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #337ab7
+}
+
+nav ul li a, nav ul li span {
+    padding: 7px 8px;
+    display: block
+}
+
+nav ul li span.active {
+    color: #fff
+}
+
+nav ul li span.disabled {
+    color: #777;
+    cursor: not-allowed
+}
+
+input[data-v-6ca9551c] {
+    border: 1px solid #ccc;
+    outline: none;
+    border-right: none;
+    padding: 5px;
+    width: 500px
+}
+
+button[data-v-6ca9551c] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    cursor: pointer
+}
+
+button[data-v-6ca9551c]:active {
+    opacity: .8
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #73879c;
+    font-size: 14px
+}
+
+.app-footer, .app-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 8px 2px
+}
+
+.app-upload {
+    padding: 10px 0
 }

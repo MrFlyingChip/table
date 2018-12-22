@@ -44,19 +44,28 @@ class App extends Component {
         })
         return (
             <div className="App">
-                <div>Show
-                    <select onChange={this.onCountChange.bind(this)}>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="25">25</option>
-                    </select>
-                    entries per page
+                <div className={'app-header'}>
+                    <div>Show
+                        <select onChange={this.onCountChange.bind(this)}>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="25">25</option>
+                        </select>
+                        entries per page
+                    </div>
+                    <div className={'search-items'}>
+                        Search:
+                        <input type={'search'}/>
+                    </div>
                 </div>
                 <table>
                     <thead>{tableCols}</thead>
                     <tbody>{tableRows}</tbody>
                 </table>
+                <div className={'app-footer'}>
+                    <div>Showing {this.state.count * this.state.page + 1} to {this.state.count * this.state.page + this.state.count} of {this.props.user.table.length} entries</div>
+                </div>
             </div>
         );
     }
