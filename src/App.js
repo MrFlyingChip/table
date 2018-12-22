@@ -1,58 +1,65 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
-import Header from "./components/Header";
-import NoteEditor from "./components/NoteEditor";
-import NoteGrid from "./components/NoteGrid";
-import NoteItem from "./components/NoteItem";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as UserActions from "./actions/UserActions";
 
 const initialState = {
-  filteredNotes: null,
-  hashTag: null
+    page: 0,
+    count: 5
 };
+
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = initialState;
-  }
+    constructor(props) {
+        super(props);
+        this.state = initialState;
+    }
 
-  componentDidMount(){
-      this.props.actions.fetchNotes(this.findByHashTag);
-  }
+    componentDidMount() {
+        this.props.actions.fetchTable();
+        this.props.actions.sortTable('ID');
+        this.props.actions.fetchTableForPage(this.state.page, this.state.count);
+    }
 
-  addNote = (note) => {
-      this.props.actions.addNote(note, this.findByHashTag);
-  };
+    onCountChange = (event) => {
+        this.setState({page: 0, count: event.target.value});
+        this.props.actions.fetchTableForPage(0, event.target.value);
+    };
 
-  findByHashTag = (hashTag) => {
-     const filteredNotes = this.props.user.notes.filter(note => {return note.hashTags && note.hashTags.includes(hashTag)});
-     this.setState({filteredNotes: filteredNotes, hashTag: hashTag});
-  };
-
-  cancelHashTagSearch = () => {
-    this.setState({filteredNotes: null, hashTag: null});
-  };
-
-  deleteNote = (noteId) => {
-      this.props.actions.deleteNote(noteId);
-  };
-
-  render() {
-    const notes = this.state.filteredNotes || this.props.user.notes;
-    const hashTag = this.state.hashTag;
-    const noteItem = {text: hashTag, bgColor: `rgb(255, 0, 1)`};
-    console.log(notes);
-    return (
-      <div className="App">
-        <Header header={'Notes App'}/>
-        {(hashTag) ? <NoteItem deleteNote={this.cancelHashTagSearch} note={noteItem}/> : ""}
-        <NoteEditor addNote={this.addNote}/>
-        <NoteGrid notes={notes} deleteNote={this.deleteNote}/>
-      </div>
-    );
-  }
+    render() {
+        console.log(this.props.user.sortedTable);
+        const cols = UserActions.getTableCols(this.props.user.table);
+        const tableCols = cols.map(item => {
+        return(
+            <th>{item}</th>
+        )
+        });
+        let tableRows = this.props.user.sortedTable.map(item => {
+            return (
+                <tr>
+                    {cols.map(col => {
+                        return <td>{item[col]}</td>
+                    })}
+                </tr>)
+        })
+        return (
+            <div className="App">
+                <div>Show
+                    <select onChange={this.onCountChange.bind(this)}>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="25">25</option>
+                    </select>
+                    entries per page
+                </div>
+                <table>
+                    <thead>{tableCols}</thead>
+                    <tbody>{tableRows}</tbody>
+                </table>
+            </div>
+        );
+    }
 }
 
 function mapStateToProps(state) {

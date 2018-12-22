@@ -1,3 +1,4 @@
-export const FETCH_STICKERS = 'FETCH_STICKERS';
-export const DELETE_STICKER = 'DELETE_STICKER';
-export const ADD_STICKER = 'ADD_STICKER';
+export const FETCH_TABLE = 'FETCH_TABLE';
+export const FETCH_TABLE_FOR_PAGE = 'FETCH_TABLE_FOR_PAGE';
+export const SORT_TABLE = 'SORT_TABLE';
+export const SEARCH_IN_TABLE = 'SEARCH_IN_TABLE';
