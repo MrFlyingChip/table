@@ -3,6 +3,10 @@ import './App.css';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as UserActions from "./actions/UserActions";
+import Header from "./components/Header";
+import Table from "./components/Table";
+import Footer from "./components/Footer";
+import PageNav from "./components/PageNav";
 
 const initialState = {
     page: 0,
@@ -26,45 +30,38 @@ class App extends Component {
         this.props.actions.fetchTableForPage(0, event.target.value);
     };
 
+    goOnPage = (page) => {
+        if(page >= 0 && page <= this.props.user.maxPages - 1){
+            this.setState({page: page});
+            this.props.actions.fetchTableForPage(page, this.state.count);
+        }
+    };
+
+    onSearchChange = (event) => {
+        this.props.actions.searchInTable(event.target.value);
+    };
+
     render() {
-        console.log(this.props.user.sortedTable);
-        const cols = UserActions.getTableCols(this.props.user.table);
-        const tableCols = cols.map(item => {
-        return(
-            <th>{item}</th>
-        )
-        });
-        let tableRows = this.props.user.sortedTable.map(item => {
-            return (
-                <tr>
-                    {cols.map(col => {
-                        return <td>{item[col]}</td>
-                    })}
-                </tr>)
-        })
         return (
             <div className="App">
-                <div className={'app-header'}>
-                    <div>Show
-                        <select onChange={this.onCountChange.bind(this)}>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="25">25</option>
-                        </select>
-                        entries per page
-                    </div>
-                    <div className={'search-items'}>
-                        Search:
-                        <input type={'search'}/>
-                    </div>
-                </div>
-                <table>
-                    <thead>{tableCols}</thead>
-                    <tbody>{tableRows}</tbody>
-                </table>
+                <Header onCountChange={this.onCountChange} onSearchChange={this.onSearchChange}/>
+                <Table
+                    headings={UserActions.getTableCols(this.props.user.table)}
+                    data={this.props.user.sortedTable}
+                />
                 <div className={'app-footer'}>
-                    <div>Showing {this.state.count * this.state.page + 1} to {this.state.count * this.state.page + this.state.count} of {this.props.user.table.length} entries</div>
+                    <Footer
+                        count={this.state.count}
+                        page={this.state.page}
+                        rowsCount={this.props.user.table.length}
+                        rowsFilteredCount={this.props.user.filteredTable.length}
+                        filtered={this.props.user.filtered}
+                    />
+                    <PageNav
+                        maxPages={this.props.user.maxPages}
+                        currentPage={this.state.page}
+                        goOnPage={this.goOnPage}
+                    />
                 </div>
             </div>
         );

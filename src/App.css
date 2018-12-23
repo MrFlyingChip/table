@@ -226,16 +226,16 @@ nav ul li a {
     color: #337ab7
 }
 
-nav ul li a, nav ul li span {
+nav ul li a {
     padding: 7px 8px;
     display: block
 }
 
-nav ul li span.active {
+nav ul li .active {
     color: #fff
 }
 
-nav ul li span.disabled {
+nav ul li .disabled {
     color: #777;
     cursor: not-allowed
 }
@@ -278,4 +278,9 @@ button[data-v-6ca9551c]:active {
 
 .app-upload {
     padding: 10px 0
+}
+
+body {
+    display: block;
+    margin: 8px;
 }

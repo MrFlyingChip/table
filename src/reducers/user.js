@@ -2,7 +2,10 @@ import {FETCH_TABLE, FETCH_TABLE_FOR_PAGE, SEARCH_IN_TABLE, SORT_TABLE} from '..
 
 let initialState = {
     table: [],
-    sortedTable: []
+    sortedTable: [],
+    maxPages: 0,
+    filtered: false,
+    filteredTable: []
 };
 
 export default function page(state = initialState, action) {
@@ -10,9 +13,9 @@ export default function page(state = initialState, action) {
         case FETCH_TABLE:
             return {...state, table: action.table};
         case FETCH_TABLE_FOR_PAGE:
-            return {...state, sortedTable: action.sortedTable};
+            return {...state, sortedTable: action.sortedTable, maxPages: action.maxPages};
         case SEARCH_IN_TABLE:
-            return {...state, table: action.table};
+            return {...state, filteredTable: action.filteredTable, filtered: action.filtered};
         case SORT_TABLE:
             return {...state, sortedTable: action.sortedTable};
         default:
