@@ -10,7 +10,9 @@ import PageNav from "./components/PageNav";
 
 const initialState = {
     page: 0,
-    count: 5
+    count: 5,
+    sortBy: '',
+    sort: 0
 };
 
 class App extends Component {
@@ -21,7 +23,8 @@ class App extends Component {
 
     componentDidMount() {
         this.props.actions.fetchTable();
-        this.props.actions.sortTable('ID');
+        this.setState({sortBy: UserActions.getTableCols()[0]});
+        this.props.actions.sortTable(this.state.sortBy, this.state.sort);
         this.props.actions.fetchTableForPage(this.state.page, this.state.count);
     }
 
@@ -39,15 +42,27 @@ class App extends Component {
 
     onSearchChange = (event) => {
         this.props.actions.searchInTable(event.target.value);
+        this.props.actions.fetchTableForPage(0, this.state.count);
+        this.setState({page: 0});
+    };
+
+    sortTable = (col, asc) => {
+        this.setState({sortBy: col, sort: asc});
+        this.props.actions.sortTable(col, asc);
+        this.props.actions.fetchTableForPage(this.state.page, this.state.count);
     };
 
     render() {
+        console.log(this.props.user.maxPages);
         return (
             <div className="App">
                 <Header onCountChange={this.onCountChange} onSearchChange={this.onSearchChange}/>
                 <Table
                     headings={UserActions.getTableCols(this.props.user.table)}
                     data={this.props.user.sortedTable}
+                    sortBy={this.state.sortBy}
+                    sort={this.state.sort}
+                    sortTable={this.sortTable}
                 />
                 <div className={'app-footer'}>
                     <Footer

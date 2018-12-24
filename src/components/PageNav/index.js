@@ -9,7 +9,7 @@ const PageNav = ({goOnPage, currentPage, maxPages}) => {
         let pagesNav = [];
         pagesNav.push(createLi(0));
         if(currentPage - 3 <= 0) {
-            const reachedMaxPage = (maxPages < 5);
+            const reachedMaxPage = (maxPages <= 5);
             let endPage = 5;
             if(reachedMaxPage) {
                 endPage = maxPages;

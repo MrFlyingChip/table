@@ -15,7 +15,7 @@ export default function page(state = initialState, action) {
         case FETCH_TABLE_FOR_PAGE:
             return {...state, sortedTable: action.sortedTable, maxPages: action.maxPages};
         case SEARCH_IN_TABLE:
-            return {...state, filteredTable: action.filteredTable, filtered: action.filtered};
+            return {...state, filteredTable: action.filteredTable, filtered: action.filtered, maxPages: action.maxPages};
         case SORT_TABLE:
             return {...state, sortedTable: action.sortedTable};
         default:

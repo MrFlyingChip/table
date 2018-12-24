@@ -25,19 +25,19 @@ export function fetchTableForPage(page, count) {
         dispatch({
             type: FETCH_TABLE_FOR_PAGE,
             sortedTable: result,
-            maxPages: Math.ceil((getState().user.filtered) ? getState().user.filteredTable / count : table.length / count)
+            maxPages: Math.ceil((getState().user.filtered) ? getState().user.filteredTable.length / count : table.length / count)
         })
     }
 }
 
-export function sortTable(field) {
+export function sortTable(field, asc) {
     return(dispatch, getState) => {
-        let result = getState().user.table;
+        let result = (getState().user.filtered) ? getState().user.filteredTable : getState().user.table;
         result = result.sort(function (a, b) {
-            if (a[field] > b[field]) {
+            if ((a[field] > b[field] && asc === 0) || (a[field] < b[field] && asc === 1)) {
                 return 1;
             }
-            if (a[field] < b[field]) {
+            if ((a[field] < b[field] && asc === 0) || (a[field] > b[field] && asc === 1)) {
                 return -1;
             }
 
@@ -46,7 +46,7 @@ export function sortTable(field) {
 
         dispatch({
             type: SORT_TABLE,
-            table: result
+            sortedTable: result
         })
     }
 }
